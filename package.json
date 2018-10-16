@@ -1,0 +1,14 @@
+{
+  "name": "plebbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Garrett Cox",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "lodash": "^4.17.11",
+    "shell-quote": "^1.6.1"
+  }
+}
