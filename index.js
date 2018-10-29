@@ -7,11 +7,13 @@ const _ = require('lodash');
 const cmdregex = new RegExp(`^<@${config.botId}> (.+)$`, 'i');
 const fs = require('fs');
 const help = require('./commands/help');
+const lfgHandler = require('./lib/lfgHandler');
 
 const commandFiles = fs.readdirSync('./commands').map(s => s.split('.').shift());
 const commands = _.zipObject(commandFiles, commandFiles.map(c => require(`./commands/${c}`)));
 
 bot.on('message', async (ctx) => {
+  if (ctx.channel.id === config.lfgChannel) return lfgHandler.handler(ctx);
   const match = ctx.content.match(cmdregex);
   if (!match) return;
 
@@ -33,6 +35,8 @@ bot.on('message', async (ctx) => {
 
 bot.on('ready', () => {
   bot.user.setActivity('Fluxbit likes men');
+
+  lfgHandler.repeater(bot);
 });
 
 bot.login(config.token);
